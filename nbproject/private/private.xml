@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/Detalle.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/Eventos.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/EntrenadorDao.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Vista/Sistema.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/Entrenador.java</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Vista/Login.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/Config.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SistemaGimnasio/src/Modelo/PlanesDao.java</file>
         </group>
     </open-files>
 </project-private>

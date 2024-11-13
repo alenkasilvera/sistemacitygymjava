@@ -37,7 +37,7 @@ public class EntrenadorDao {
         }
     }
     
-    public List<Entrenador> ListarEntrenador() {
+    public List ListarEntrenador() {
         List<Entrenador> Listapr = new ArrayList<>();
         String sql = "SELECT * FROM entrenador";
         try {

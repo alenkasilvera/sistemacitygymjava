@@ -173,6 +173,62 @@ public class PlanesDao {
         }
         return plan;
     }
+    
+    public Config BuscarDatos() {
+        Config conf = new Config();
+        String sql = "SELECT * FROM configuracion";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                conf.setId(rs.getInt("id")); 
+                conf.setNombre(rs.getString("nombre"));
+                conf.setCuil(rs.getString("cuil"));
+                conf.setTelefono(rs.getString("telefono"));
+                conf.setDireccion(rs.getString("direccion"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close(); // Cierra la conexión si está abierta
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return conf;
+    }
+    
+    public boolean ModificarDatos(Config conf) {
+        String sql = "UPDATE configuracion SET nombre=?, cuil=?, telefono=?, direccion=? WHERE id=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, conf.getNombre());
+            ps.setString(2, conf.getCuil());
+            ps.setString(3, conf.getTelefono());
+            ps.setString(4, conf.getDireccion());
+            ps.setInt(5, conf.getId());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close(); // Cierra la conexión si está abierta
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+    }
+    
+    
 }
 
 

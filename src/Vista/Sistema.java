@@ -1,5 +1,6 @@
 package Vista;
 
+import Modelo.Config;
 import Modelo.Detalle;
 import Modelo.Socio;
 import Modelo.SocioDao;
@@ -31,6 +32,7 @@ public class Sistema extends javax.swing.JFrame {
     PagoDao Pdao = new PagoDao();
     Detalle Dv = new Detalle();
     Eventos event = new Eventos();
+    Config conf = new Config();
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel tmp = new DefaultTableModel();
     int item;
@@ -45,12 +47,11 @@ public class Sistema extends javax.swing.JFrame {
         txtIdPlanes.setVisible(false);
         AutoCompleteDecorator.decorate(cbxEntrenadorPlanes);
         proDao.ConsultarEntrenador(cbxEntrenadorPlanes);
+        txtIdConfig.setVisible(false);
+        ListarConfig();
        
     }
 
-    
-    
-    
     
     
     public void ListarSocio() {
@@ -102,7 +103,7 @@ public class Sistema extends javax.swing.JFrame {
             modelo.addRow(ob);
         }
 
-        TableEntrenador.setModel(modelo);
+        TablePlanes.setModel(modelo);
 
     }
     
@@ -124,7 +125,14 @@ public class Sistema extends javax.swing.JFrame {
 
     }
     
-    
+    public void ListarConfig() {
+        conf = proDao.BuscarDatos();
+        txtIdConfig.setText(""+conf.getId());
+        txtCuilConfig.setText(""+conf.getCuil());
+        txtNombreConfig.setText(""+conf.getNombre());
+        txtTelefonoConfig.setText(""+conf.getTelefono());
+        txtDireccionConfig.setText(""+conf.getDireccion());
+    }
     
     public void LimpiarTable() {
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
@@ -216,24 +224,23 @@ public class Sistema extends javax.swing.JFrame {
         btnEditarPlanes = new javax.swing.JButton();
         btnEliminarPlanes = new javax.swing.JButton();
         btnNuevoPlanes = new javax.swing.JButton();
-        btnExcelPlanes = new javax.swing.JButton();
         txtIdPlanes = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePagos = new javax.swing.JTable();
-        btnPdfPagos = new javax.swing.JButton();
         txtIdPagos = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
+        txtCuilConfig = new javax.swing.JTextField();
+        txtNombreConfig = new javax.swing.JTextField();
+        txtTelefonoConfig = new javax.swing.JTextField();
+        txtDireccionConfig = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jButton23 = new javax.swing.JButton();
+        btnActualizarConfig = new javax.swing.JButton();
+        txtIdConfig = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnNuevoPago = new javax.swing.JButton();
         btnSocios = new javax.swing.JButton();
@@ -976,9 +983,6 @@ public class Sistema extends javax.swing.JFrame {
         btnNuevoPlanes.setBackground(new java.awt.Color(204, 204, 255));
         btnNuevoPlanes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
 
-        btnExcelPlanes.setBackground(new java.awt.Color(204, 204, 255));
-        btnExcelPlanes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/excel.png"))); // NOI18N
-
         txtIdPlanes.setBackground(new java.awt.Color(204, 204, 255));
         txtIdPlanes.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1003,8 +1007,7 @@ public class Sistema extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEditarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNuevoPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addComponent(btnExcelPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtCodigoPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtPrecioPlanes)
@@ -1047,15 +1050,12 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(cbxEntrenadorPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnGuardarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEditarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnNuevoPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnExcelPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnGuardarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEliminarPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevoPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(txtIdPlanes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1085,9 +1085,6 @@ public class Sistema extends javax.swing.JFrame {
             TablePagos.getColumnModel().getColumn(3).setPreferredWidth(40);
         }
 
-        btnPdfPagos.setBackground(new java.awt.Color(204, 204, 255));
-        btnPdfPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
-
         txtIdPagos.setBackground(new java.awt.Color(204, 204, 255));
         txtIdPagos.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1099,8 +1096,7 @@ public class Sistema extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnPdfPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(68, 68, 68)
                         .addComponent(txtIdPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(52, Short.MAX_VALUE))
@@ -1108,10 +1104,8 @@ public class Sistema extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPdfPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addComponent(txtIdPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -1137,30 +1131,37 @@ public class Sistema extends javax.swing.JFrame {
         jLabel29.setForeground(new java.awt.Color(0, 0, 0));
         jLabel29.setText("Direccion");
 
-        jTextField20.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField20.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jTextField20.setForeground(new java.awt.Color(0, 0, 0));
+        txtCuilConfig.setBackground(new java.awt.Color(204, 204, 204));
+        txtCuilConfig.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtCuilConfig.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField21.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField21.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jTextField21.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombreConfig.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreConfig.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtNombreConfig.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField22.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField22.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jTextField22.setForeground(new java.awt.Color(0, 0, 0));
+        txtTelefonoConfig.setBackground(new java.awt.Color(204, 204, 204));
+        txtTelefonoConfig.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtTelefonoConfig.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField23.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField23.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jTextField23.setForeground(new java.awt.Color(0, 0, 0));
+        txtDireccionConfig.setBackground(new java.awt.Color(204, 204, 204));
+        txtDireccionConfig.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDireccionConfig.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel30.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(0, 0, 0));
         jLabel30.setText("DATOS DE LA EMPRESA");
 
-        jButton23.setBackground(new java.awt.Color(204, 204, 204));
-        jButton23.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton23.setForeground(new java.awt.Color(0, 0, 0));
-        jButton23.setText("Actualizar");
+        btnActualizarConfig.setBackground(new java.awt.Color(204, 204, 204));
+        btnActualizarConfig.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnActualizarConfig.setForeground(new java.awt.Color(0, 0, 0));
+        btnActualizarConfig.setText("Actualizar");
+        btnActualizarConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarConfigActionPerformed(evt);
+            }
+        });
+
+        txtIdConfig.setBackground(new java.awt.Color(204, 204, 255));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1171,47 +1172,54 @@ public class Sistema extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29)
+                            .addComponent(txtDireccionConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(99, 99, 99)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel26)
+                                            .addComponent(txtIdConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(177, 177, 177))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(txtCuilConfig)
+                                        .addGap(69, 69, 69)))
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel27)
-                                    .addComponent(jTextField21)
-                                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                    .addComponent(txtNombreConfig)
+                                    .addComponent(btnActualizarConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addGap(97, 97, 97)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel28)
-                                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel29)
-                            .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtTelefonoConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(284, 284, 284)
                         .addComponent(jLabel30)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jLabel30)
-                .addGap(75, 75, 75)
+                .addGap(10, 10, 10)
+                .addComponent(txtIdConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(jLabel27)
                     .addComponent(jLabel28))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCuilConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefonoConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
                 .addComponent(jLabel29)
                 .addGap(39, 39, 39)
-                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDireccionConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnActualizarConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
 
@@ -1276,6 +1284,11 @@ public class Sistema extends javax.swing.JFrame {
         btnConfig.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnConfig.setForeground(new java.awt.Color(255, 255, 255));
         btnConfig.setText("Config");
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigActionPerformed(evt);
+            }
+        });
 
         LabelVendedor.setText("Alenka S.");
 
@@ -1672,8 +1685,7 @@ public class Sistema extends javax.swing.JFrame {
                         return;
                     }
                 }
-                
-                
+                              
                 // Usamos generics para definir el tipo de ArrayList
                 ArrayList lista = new ArrayList();
                 lista.add(item);
@@ -1798,6 +1810,36 @@ public class Sistema extends javax.swing.JFrame {
         ListarPagos();
     }//GEN-LAST:event_btnPagosActionPerformed
 
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(5);
+    }//GEN-LAST:event_btnConfigActionPerformed
+
+    private void btnActualizarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarConfigActionPerformed
+        // TODO add your handling code here:
+        
+            if (!"".equals(txtCuilConfig.getText())
+                || !"".equals(txtNombreConfig.getText())
+                || !"".equals(txtTelefonoConfig.getText())
+                || !"".equals(txtDireccionConfig.getText())) {
+                
+                conf.setCuil(txtCuilConfig.getText());
+                conf.setNombre(txtNombreConfig.getText());
+                conf.setTelefono(txtTelefonoConfig.getText());
+                conf.setDireccion(txtDireccionConfig.getText());
+                conf.setId(Integer.parseInt(txtIdConfig.getText()));
+                proDao.ModificarDatos(conf);
+                JOptionPane.showMessageDialog(null, "Datos de la empresa modificados con éxito.");
+                ListarConfig();
+                ListarEntrenador();
+                LimpiarEntrenador();
+            } else {
+                JOptionPane.showMessageDialog(null, "Los campos estan vacios.");
+        }
+        
+        
+    }//GEN-LAST:event_btnActualizarConfigActionPerformed
+    
     
     
     
@@ -1844,6 +1886,7 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JTable TablePagos;
     private javax.swing.JTable TablePlanes;
     private javax.swing.JTable TableSocio;
+    private javax.swing.JButton btnActualizarConfig;
     private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnEditarEntrenador;
     private javax.swing.JButton btnEditarPlanes;
@@ -1853,7 +1896,6 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarPlanes;
     private javax.swing.JButton btnEliminarSocio;
     private javax.swing.JButton btnEntrenador;
-    private javax.swing.JButton btnExcelPlanes;
     private javax.swing.JButton btnGenerarPago;
     private javax.swing.JButton btnGuardarEntrenador;
     private javax.swing.JButton btnGuardarPlanes;
@@ -1863,11 +1905,9 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoPlanes;
     private javax.swing.JButton btnNuevoSocio;
     private javax.swing.JButton btnPagos;
-    private javax.swing.JButton btnPdfPagos;
     private javax.swing.JButton btnPlanes;
     private javax.swing.JButton btnSocios;
     private javax.swing.JComboBox<String> cbxEntrenadorPlanes;
-    private javax.swing.JButton jButton23;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1908,28 +1948,28 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField txtCantidadPago;
     private javax.swing.JTextField txtCodigoPago;
     private javax.swing.JTextField txtCodigoPlanes;
+    private javax.swing.JTextField txtCuilConfig;
     private javax.swing.JTextField txtCuposPago;
     private javax.swing.JTextField txtCuposPlanes;
     private javax.swing.JTextField txtDNIEntrenador;
     private javax.swing.JLabel txtDNIPago;
     private javax.swing.JTextField txtDNISocio;
     private javax.swing.JTextField txtDescripcionPago;
+    private javax.swing.JTextField txtDireccionConfig;
     private javax.swing.JTextField txtDireccionEntrenador;
     private javax.swing.JTextField txtDireccionSocio;
     private javax.swing.JTextField txtDireccionSocioP;
     private javax.swing.JTextField txtDniP;
+    private javax.swing.JTextField txtIdConfig;
     private javax.swing.JTextField txtIdEntrenador;
     private javax.swing.JTextField txtIdPago;
     private javax.swing.JTextField txtIdPagos;
     private javax.swing.JTextField txtIdPlanes;
     private javax.swing.JTextField txtIdSocio;
+    private javax.swing.JTextField txtNombreConfig;
     private javax.swing.JTextField txtNombreEntrenador;
     private javax.swing.JTextField txtNombrePlanes;
     private javax.swing.JTextField txtNombreSocio;
@@ -1937,6 +1977,7 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JLabel txtNombreSocioPago;
     private javax.swing.JTextField txtPrecioPago;
     private javax.swing.JTextField txtPrecioPlanes;
+    private javax.swing.JTextField txtTelefonoConfig;
     private javax.swing.JTextField txtTelefonoEntrenador;
     private javax.swing.JTextField txtTelefonoSocio;
     private javax.swing.JTextField txtTelefonoSocioP;
